@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const canvasWidth = 800;
 const canvasHeight = 400;
@@ -34,6 +34,8 @@ export default function Game() {
     vx: 0,
     vy: 0,
   });
+  const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
   const enemiesRef = useRef<Sprite[]>([]);
   const powerUpsRef = useRef<Sprite[]>([]);
   const fireballsRef = useRef<Sprite[]>([]);
@@ -129,13 +131,13 @@ export default function Game() {
           if (player.y + player.height < e.y + 10) {
             // jump on enemy
             player.vy = jumpStrength / 2;
+            setScore((s) => s + 1);
             return false; // enemy removed
           } else {
             // hit by enemy
-            // reset player position
-            player.x = 50;
-            player.y = groundY;
-            player.vy = 0;
+            setGameOver(true);
+            cancelAnimationFrame(animationRef.current!);
+            return false; // remove enemy
           }
         }
         return true;
@@ -229,6 +231,15 @@ export default function Game() {
       update(dt);
       draw();
       animationRef.current = requestAnimationFrame(loop);
+      restartRef.current = () => {
+        setScore(0);
+        setGameOver(false);
+        playerRef.current = { ...playerRef.current, x: 50, y: groundY, vy: 0 };
+        enemiesRef.current = [];
+        powerUpsRef.current = [];
+        fireballsRef.current = [];
+        animationRef.current = requestAnimationFrame(loop);
+      };
     };
 
     animationRef.current = requestAnimationFrame(loop);
@@ -240,11 +251,36 @@ export default function Game() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={canvasWidth}
-      height={canvasHeight}
-      style={{ border: "1px solid #000", background: "#87ceeb" }}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        width={canvasWidth}
+        height={canvasHeight}
+        style={{ border: "1px solid #000", background: "#87ceeb" }}
+      />
+      <div style={{ position: "absolute", top: 10, right: 10, color: "white", fontSize: "1.5rem" }}>
+        Score: {score}
+      </div>
+      {gameOver && (
+        <div style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          backgroundColor: "rgba(0,0,0,0.8)",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "white",
+          fontSize: "2rem"
+        }}>
+          <div>Game Over</div>
+          <div>Your Score: {score}</div>
+          <button onClick={() => restartRef.current()} style={{ marginTop: "1rem", padding: "0.5rem 1rem", fontSize: "1rem" }}>Restart</button>
+        </div>
+      )}
+    </>
   );
 }
