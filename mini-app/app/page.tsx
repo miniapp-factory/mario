@@ -1,4 +1,3 @@
-import { description, title } from "@/lib/metadata";
 import Game from "@/components/game";
 import { generateMetadata } from "@/lib/farcaster-embed";
 
