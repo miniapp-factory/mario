@@ -25,6 +25,7 @@ type Sprite = {
 export default function Game() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
+  const restartRef = useRef<() => void>(() => {});
   const playerRef = useRef<Sprite>({
     x: 50,
     y: groundY,
