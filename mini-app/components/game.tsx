@@ -109,7 +109,8 @@ export default function Game() {
     const update = (dt: number) => {
       const player = playerRef.current;
       // player physics
-      player.vy += gravity;
+      const currentVy = player.vy ?? 0;
+      player.vy = currentVy + gravity;
       player.y += player.vy;
       if (player.y > groundY) {
         player.y = groundY;
