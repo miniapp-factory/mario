@@ -37,6 +37,8 @@ export default function Game() {
     vy: 0,
   });
   const [score, setScore] = useState(0);
+  const [powerUpActive, setPowerUpActive] = useState(false);
+  const powerUpTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const enemiesRef = useRef<Sprite[]>([]);
   const powerUpsRef = useRef<Sprite[]>([]);
