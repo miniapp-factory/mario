@@ -231,7 +231,7 @@ export default function Game() {
         ctx.font = `${s.height}px Arial`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText(s.emoji, s.x + s.width / 2, s.y + s.height / 2);
+        ctx.fillText(s.emoji ?? "", s.x + s.width / 2, s.y + s.height / 2);
       }
     };
 
