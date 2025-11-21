@@ -32,7 +32,7 @@ export default function Game() {
     y: groundY,
     width: 30,
     height: 30,
-    image: "/mario.png",
+    emoji: "👾",
     vx: 0,
     vy: 0,
   });
