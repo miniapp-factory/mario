@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 const canvasWidth = 800;
 const canvasHeight = 400;
 const groundY = canvasHeight - 50;
+const groundYRef = useRef<number>(groundY);
 const gravity = 0.6;
 const jumpStrength = -12;
 const moveSpeed = 2;
@@ -29,7 +30,7 @@ export default function Game() {
   const restartRef = useRef<() => void>(() => {});
   const playerRef = useRef<Sprite>({
     x: 50,
-    y: groundY,
+    y: groundYRef.current,
     width: 30,
     height: 30,
     emoji: "🦘",
@@ -45,7 +46,7 @@ export default function Game() {
   const fireballsRef = useRef<Sprite[]>([]);
   const flagPoleRef = useRef<Sprite>({
     x: 2000,
-    y: groundY - 80,
+    y: groundYRef.current - 80,
     width: 20,
     height: 80,
     emoji: "🏁",
@@ -65,7 +66,7 @@ export default function Game() {
     const spawnEnemy = () => {
       enemiesRef.current.push({
         x: canvasWidth + Math.random() * 300,
-        y: groundY,
+        y: groundYRef.current,
         width: 30,
         height: 30,
         emoji: "👹",
@@ -79,7 +80,7 @@ export default function Game() {
       const isStar = Math.random() < 0.3;
       powerUpsRef.current.push({
         x: canvasWidth + Math.random() * 300,
-        y: groundY - 60,
+        y: groundYRef.current - 60,
         width: 20,
         height: 20,
         emoji: isStar ? "⭐" : "🍎",
@@ -119,7 +120,7 @@ export default function Game() {
       const currentVy = player.vy ?? 0;
       player.vy = currentVy + gravity;
       player.y += player.vy;
-      if (player.y > groundY) {
+      if (player.y > groundYRef.current) {
         player.y = groundY;
         player.vy = 0;
       }
