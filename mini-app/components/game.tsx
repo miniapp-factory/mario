@@ -31,7 +31,7 @@ export default function Game() {
     y: groundY,
     width: 30,
     height: 30,
-    emoji: "🧑‍🚀",
+    image: "/mario.png",
     vx: 0,
     vy: 0,
   });
@@ -220,10 +220,18 @@ export default function Game() {
     };
 
     const drawSprite = (ctx: CanvasRenderingContext2D, s: Sprite) => {
-      ctx.font = `${s.height}px Arial`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(s.emoji, s.x + s.width / 2, s.y + s.height / 2);
+      if (s.image) {
+        const img = new Image();
+        img.src = s.image;
+        img.onload = () => {
+          ctx.drawImage(img, s.x, s.y, s.width, s.height);
+        };
+      } else {
+        ctx.font = `${s.height}px Arial`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(s.emoji, s.x + s.width / 2, s.y + s.height / 2);
+      }
     };
 
     const loop = (time: number) => {
