@@ -162,3 +162,91 @@
 +can you make this game responsive for mobile ? 
 +
 +also it needs to be able to accept tapping from mobile fingers as input , this will make him jump. single tap equals jump.
+
+# 2025-11-21 12:52:24.104536
++fix these errors systematically:
++
++these 5 derivations will be built:
++/nix/store/5qf9x3d8fhv5860yifzy4475yy80yz3k-xnode-miniapp-template-1.0.0.drv
++/nix/store/px5mc5v4xm18myma641925nfbbp2n006-unit-xnode-miniapp-template.service.drv
++/nix/store/s7jzgsypxv5kry8qg168jk3940f0j0f4-system-units.drv
++/nix/store/5jrd1nhk2710myhny02v0an4c0lfjbal-etc.drv
++/nix/store/1a8y3girf5x9ch4kkd6jq8f8im8hm53m-nixos-system-mario-25.11.20250921.554be64.drv
++building '/nix/store/5qf9x3d8fhv5860yifzy4475yy80yz3k-xnode-miniapp-template-1.0.0.drv'...
++error: builder for '/nix/store/5qf9x3d8fhv5860yifzy4475yy80yz3k-xnode-miniapp-template-1.0.0.drv' failed with exit code 1;
++last 25 log lines:
++> ⨯ preloadEntriesOnStart
++> ✓ webpackMemoryOptimizations
++>
++> Creating an optimized production build ...
++> ✓ Compiled successfully in 13.2s
++> Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types .
++> Failed to compile.
++>
++> ./components/game.tsx
++> 8:20 Error: React Hook "useRef" cannot be called at the top level. React Hooks must be called in a React function component or a custom React Hook function. react-hooks/rules-of-hooks
++> 281:6 Warning: React Hook useEffect has a missing dependency: 'powerUpActive'. Either include it or remove the dependency array. react-hooks/exhaustive-deps
++>
++> ./components/share.tsx
++> 93:15 Warning: The attribute aria-hidden is not supported by the role none. jsx-a11y/role-supports-aria-props
++>
++> info - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
++> .
++> ERROR: `npm build` failed
++>
++> Here are a few things you can try, depending on the error:
++> 1. Make sure your build script (build) exists
++> If there is none, set `dontNpmBuild = true`.
++> 2. If the error being thrown is something similar to "error:0308010C:digital envelope routines::unsupported", add `NODE_OPTIONS = "--openssl-legacy-provider"` to your derivation
++> See https://github.com/webpack/webpack/issues/14532 for more information.
++>
++For full logs, run:
++nix log /nix/store/5qf9x3d8fhv5860yifzy4475yy80yz3k-xnode-miniapp-template-1.0.0.drv
++error: 1 dependencies of derivation '/nix/store/px5mc5v4xm18myma641925nfbbp2n006-unit-xnode-miniapp-template.service.drv' failed to build
++error: 1 dependencies of derivation '/nix/store/s7jzgsypxv5kry8qg168jk3940f0j0f4-system-units.drv' failed to build
++error: 1 dependencies of derivation '/nix/store/5jrd1nhk2710myhny02v0an4c0lfjbal-etc.drv' failed to build
++error: 1 dependencies of derivation '/nix/store/1a8y3girf5x9ch4kkd6jq8f8im8hm53m-nixos-system-mario-25.11.20250921.554be64.drv' failed to build
+
+# 2025-11-21 12:52:24.104962
++fix these errors systematically:
++
++these 5 derivations will be built:
++/nix/store/5qf9x3d8fhv5860yifzy4475yy80yz3k-xnode-miniapp-template-1.0.0.drv
++/nix/store/px5mc5v4xm18myma641925nfbbp2n006-unit-xnode-miniapp-template.service.drv
++/nix/store/s7jzgsypxv5kry8qg168jk3940f0j0f4-system-units.drv
++/nix/store/5jrd1nhk2710myhny02v0an4c0lfjbal-etc.drv
++/nix/store/1a8y3girf5x9ch4kkd6jq8f8im8hm53m-nixos-system-mario-25.11.20250921.554be64.drv
++building '/nix/store/5qf9x3d8fhv5860yifzy4475yy80yz3k-xnode-miniapp-template-1.0.0.drv'...
++error: builder for '/nix/store/5qf9x3d8fhv5860yifzy4475yy80yz3k-xnode-miniapp-template-1.0.0.drv' failed with exit code 1;
++last 25 log lines:
++> ⨯ preloadEntriesOnStart
++> ✓ webpackMemoryOptimizations
++>
++> Creating an optimized production build ...
++> ✓ Compiled successfully in 13.2s
++> Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types . Linting and checking validity of types .. Linting and checking validity of types ... Linting and checking validity of types .
++> Failed to compile.
++>
++> ./components/game.tsx
++> 8:20 Error: React Hook "useRef" cannot be called at the top level. React Hooks must be called in a React function component or a custom React Hook function. react-hooks/rules-of-hooks
++> 281:6 Warning: React Hook useEffect has a missing dependency: 'powerUpActive'. Either include it or remove the dependency array. react-hooks/exhaustive-deps
++>
++> ./components/share.tsx
++> 93:15 Warning: The attribute aria-hidden is not supported by the role none. jsx-a11y/role-supports-aria-props
++>
++> info - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
++> .
++> ERROR: `npm build` failed
++>
++> Here are a few things you can try, depending on the error:
++> 1. Make sure your build script (build) exists
++> If there is none, set `dontNpmBuild = true`.
++> 2. If the error being thrown is something similar to "error:0308010C:digital envelope routines::unsupported", add `NODE_OPTIONS = "--openssl-legacy-provider"` to your derivation
++> See https://github.com/webpack/webpack/issues/14532 for more information.
++>
++For full logs, run:
++nix log /nix/store/5qf9x3d8fhv5860yifzy4475yy80yz3k-xnode-miniapp-template-1.0.0.drv
++error: 1 dependencies of derivation '/nix/store/px5mc5v4xm18myma641925nfbbp2n006-unit-xnode-miniapp-template.service.drv' failed to build
++error: 1 dependencies of derivation '/nix/store/s7jzgsypxv5kry8qg168jk3940f0j0f4-system-units.drv' failed to build
++error: 1 dependencies of derivation '/nix/store/5jrd1nhk2710myhny02v0an4c0lfjbal-etc.drv' failed to build
++error: 1 dependencies of derivation '/nix/store/1a8y3girf5x9ch4kkd6jq8f8im8hm53m-nixos-system-mario-25.11.20250921.554be64.drv' failed to build
