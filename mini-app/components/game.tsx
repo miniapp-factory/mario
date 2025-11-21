@@ -14,7 +14,7 @@ type Sprite = {
   y: number;
   width: number;
   height: number;
-  emoji: string;
+  emoji?: string;
   image?: string;
   vx?: number;
   vy?: number;
