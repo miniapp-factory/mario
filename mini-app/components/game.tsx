@@ -32,7 +32,7 @@ export default function Game() {
     y: groundY,
     width: 30,
     height: 30,
-    emoji: "👾",
+    emoji: "🦘",
     vx: 0,
     vy: 0,
   });
@@ -76,12 +76,13 @@ export default function Game() {
     };
 
     const spawnPowerUp = () => {
+      const isStar = Math.random() < 0.3;
       powerUpsRef.current.push({
         x: canvasWidth + Math.random() * 300,
         y: groundY - 60,
         width: 20,
         height: 20,
-        emoji: "🍎",
+        emoji: isStar ? "⭐" : "🍎",
         vx: -moveSpeed,
         vy: 0,
         isPowerUp: true,
@@ -132,10 +133,13 @@ export default function Game() {
       enemiesRef.current = enemiesRef.current.filter((e) => {
         if (e.x + e.width < 0) return false;
         if (rectIntersect(player, e)) {
+          if (powerUpActive) {
+            setScore((s) => s + 10);
+            return false; // enemy removed
+          }
           if (player.y + player.height < e.y + 10) {
             // jump on enemy
-            player.vy = jumpStrength / 2;
-            setScore((s) => s + 1);
+            setScore((s) => s + 10);
             return false; // enemy removed
           } else {
             // hit by enemy
@@ -150,9 +154,13 @@ export default function Game() {
       powerUpsRef.current = powerUpsRef.current.filter((p) => {
         if (p.x + p.width < 0) return false;
         if (rectIntersect(player, p)) {
-          // power up collected
-          // simple effect: increase jump strength temporarily
-          player.vy = jumpStrength * 1.5;
+          if (p.emoji === "🍎") {
+            setScore((s) => s + 1);
+          } else if (p.emoji === "⭐") {
+            setPowerUpActive(true);
+            if (powerUpTimeoutRef.current) clearTimeout(powerUpTimeoutRef.current);
+            powerUpTimeoutRef.current = setTimeout(() => setPowerUpActive(false), 10000);
+          }
           return false;
         }
         return true;
@@ -230,10 +238,16 @@ export default function Game() {
           ctx.drawImage(img, s.x, s.y, s.width, s.height);
         };
       } else {
+        ctx.save();
+        if (s.emoji === "🦘" && powerUpActive) {
+          ctx.shadowColor = "yellow";
+          ctx.shadowBlur = 10;
+        }
         ctx.font = `${s.height}px Arial`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(s.emoji ?? "", s.x + s.width / 2, s.y + s.height / 2);
+        ctx.restore();
       }
     };
 
@@ -246,6 +260,8 @@ export default function Game() {
       restartRef.current = () => {
         setScore(0);
         setGameOver(false);
+        setPowerUpActive(false);
+        if (powerUpTimeoutRef.current) clearTimeout(powerUpTimeoutRef.current);
         playerRef.current = { ...playerRef.current, x: 50, y: groundY, vy: 0 };
         enemiesRef.current = [];
         powerUpsRef.current = [];
@@ -259,6 +275,7 @@ export default function Game() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       cancelAnimationFrame(animationRef.current!);
+      if (powerUpTimeoutRef.current) clearTimeout(powerUpTimeoutRef.current);
     };
   }, []);
 
@@ -270,9 +287,11 @@ export default function Game() {
         height={canvasHeight}
         style={{ border: "1px solid #000", background: "#87ceeb" }}
       />
-      <div style={{ position: "absolute", top: 10, right: 10, color: "white", fontSize: "1.5rem" }}>
-        Score: {score}
-      </div>
+      {!gameOver && (
+        <div style={{ position: "absolute", top: 10, right: 10, color: "white", fontSize: "1.5rem" }}>
+          Score: {score}
+        </div>
+      )}
       {gameOver && (
         <div style={{
           position: "fixed",
