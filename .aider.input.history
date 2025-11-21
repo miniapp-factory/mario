@@ -134,3 +134,21 @@
 # 2025-11-21 10:53:35.752389
 +now the player mario avatar has disappeared. lets put it back if you cannot generate ai image properly . please fix .
 +
+
+# 2025-11-21 11:37:49.680330
++replace the main player emoji to be the kangaroo
++
++when you collect a random fruit then add 1 point to their score. dont re-jump after collecting a fruit, they should just go straight through it with not change of player trajectory.
++
++if they jump on enemy head they get 10 points. always show score at top right of screen , except after they die and their score pops up at centre.
++
++add a random bouncing star emoji power up, that make the player kangaroo emoji have glowing effect, it allows the player to not have to jump on enemy heads to kill them, the player caan just kill them by touching them without jumping too!
+
+# 2025-11-21 11:37:49.680864
++replace the main player emoji to be the kangaroo
++
++when you collect a random fruit then add 1 point to their score. dont re-jump after collecting a fruit, they should just go straight through it with not change of player trajectory.
++
++if they jump on enemy head they get 10 points. always show score at top right of screen , except after they die and their score pops up at centre.
++
++add a random bouncing star emoji power up, that make the player kangaroo emoji have glowing effect, it allows the player to not have to jump on enemy heads to kill them, the player caan just kill them by touching them without jumping too!
