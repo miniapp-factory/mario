@@ -243,12 +243,56 @@ export default function Game() {
     };
   }, []);
 
+  // Mobile touch controls and responsive canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const setCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = Math.floor(window.innerHeight * 0.8);
+    };
+
+    setCanvasSize();
+    window.addEventListener("resize", setCanvasSize);
+
+    const handleTouchStart = (e: TouchEvent) => {
+      const player = playerRef.current;
+      if (player.y >= groundY) {
+        player.vy = jumpStrength;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      const player = playerRef.current;
+      fireballsRef.current.push({
+        x: player.x + player.width,
+        y: player.y + player.height / 2,
+        width: 20,
+        height: 20,
+        emoji: "🔥",
+        vx: 5,
+        vy: 0,
+        isFireball: true,
+      });
+    };
+
+    canvas.addEventListener("touchstart", handleTouchStart);
+    canvas.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      window.removeEventListener("resize", setCanvasSize);
+      canvas.removeEventListener("touchstart", handleTouchStart);
+      canvas.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, []);
+
   return (
     <canvas
       ref={canvasRef}
       width={canvasWidth}
       height={canvasHeight}
-      style={{ border: "1px solid #000", background: "#87ceeb" }}
+      style={{ border: "1px solid #000", background: "#87ceeb", width: "100%", height: "auto" }}
     />
   );
 }
