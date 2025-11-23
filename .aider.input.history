@@ -30,3 +30,13 @@
 
 # 2025-11-23 22:19:18.984856
 +Make the game mobile responsive so i can also tap on mobile to control the player 
+
+# 2025-11-23 22:48:53.417683
++At score to top right of screen, and final score if you die on game over screens add restart button to game over button.
++
++When you touch enemy you should die (except when jumping on their head when you kill them) 
+
+# 2025-11-23 22:48:53.418110
++At score to top right of screen, and final score if you die on game over screens add restart button to game over button.
++
++When you touch enemy you should die (except when jumping on their head when you kill them) 
