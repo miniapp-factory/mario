@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const canvasWidth = 800;
 const canvasHeight = 400;
@@ -24,6 +24,8 @@ type Sprite = {
 
 export default function Game() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
   const animationRef = useRef<number>(0);
   const playerRef = useRef<Sprite>({
     x: 50,
@@ -129,13 +131,12 @@ export default function Game() {
           if (player.y + player.height < e.y + 10) {
             // jump on enemy
             player.vy = jumpStrength / 2;
+            setScore((s) => s + 1);
             return false; // enemy removed
           } else {
             // hit by enemy
-            // reset player position
-            player.x = 50;
-            player.y = groundY;
-            player.vy = 0;
+            setGameOver(true);
+            return false;
           }
         }
         return true;
@@ -228,6 +229,7 @@ export default function Game() {
     };
 
     const loop = (time: number) => {
+      if (gameOver) return;
       const dt = time - lastTime;
       lastTime = time;
       update(dt);
@@ -288,11 +290,63 @@ export default function Game() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={canvasWidth}
-      height={canvasHeight}
-      style={{ border: "1px solid #000", background: "#87ceeb", width: "100%", height: "auto" }}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        width={canvasWidth}
+        height={canvasHeight}
+        style={{ border: "1px solid #000", background: "#87ceeb", width: "100%", height: "auto" }}
+      />
+      <div style={{ position: "absolute", top: "1rem", right: "1rem", fontSize: "1.5rem", color: "#000" }}>
+        Score: {score}
+      </div>
+      {gameOver && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(0,0,0,0.7)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "#fff",
+            fontSize: "2rem",
+          }}
+        >
+          <p>Game Over</p>
+          <p>Final Score: {score}</p>
+          <button
+            onClick={() => {
+              setGameOver(false);
+              setScore(0);
+              playerRef.current = {
+                x: 50,
+                y: groundY,
+                width: 30,
+                height: 30,
+                emoji: "🦘",
+                vx: 0,
+                vy: 0,
+              };
+              enemiesRef.current = [];
+              powerUpsRef.current = [];
+              fireballsRef.current = [];
+            }}
+            style={{
+              marginTop: "1rem",
+              padding: "0.5rem 1rem",
+              fontSize: "1rem",
+              cursor: "pointer",
+            }}
+          >
+            Restart
+          </button>
+        </div>
+      )}
+    </>
   );
 }
