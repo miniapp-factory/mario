@@ -30,7 +30,7 @@ export default function Game() {
     y: groundY,
     width: 30,
     height: 30,
-    emoji: "🧑‍🚀",
+    emoji: "🦘",
     vx: 0,
     vy: 0,
   });
@@ -217,10 +217,14 @@ export default function Game() {
     };
 
     const drawSprite = (ctx: CanvasRenderingContext2D, s: Sprite) => {
+      ctx.save();
+      ctx.translate(s.x + s.width / 2, s.y + s.height / 2);
+      ctx.scale(-1, 1);
       ctx.font = `${s.height}px Arial`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(s.emoji, s.x + s.width / 2, s.y + s.height / 2);
+      ctx.fillText(s.emoji, 0, 0);
+      ctx.restore();
     };
 
     const loop = (time: number) => {
