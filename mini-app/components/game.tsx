@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Share } from "@/components/share";
+import { url } from "@/lib/metadata";
 
 const canvasWidth = 800;
 const canvasHeight = 400;
@@ -319,6 +321,7 @@ export default function Game() {
         >
           <p>Game Over</p>
           <p>Final Score: {score}</p>
+          <Share text={`Score: ${score} ${url}`} />
           <button
             onClick={() => {
               setGameOver(false);
