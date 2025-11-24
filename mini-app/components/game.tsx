@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { Share } from "@/components/share";
 import { url } from "@/lib/metadata";
 
-const canvasWidth = 800;
-const canvasHeight = 400;
+const canvasWidth = 375;
+const canvasHeight = 667;
 const groundY = canvasHeight - 50;
 const gravity = 0.6;
 const jumpStrength = -12;
@@ -29,9 +29,10 @@ export default function Game() {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const animationRef = useRef<number>(0);
+  const groundYRef = useRef<number>(canvasHeight - 50);
   const playerRef = useRef<Sprite>({
     x: 50,
-    y: groundY,
+    y: groundYRef.current,
     width: 30,
     height: 30,
     emoji: "🦘",
@@ -116,8 +117,8 @@ export default function Game() {
       const currentVy = player.vy ?? 0;
       player.vy = currentVy + gravity;
       player.y += player.vy;
-      if (player.y > groundY) {
-        player.y = groundY;
+      if (player.y > groundYRef.current) {
+        player.y = groundYRef.current;
         player.vy = 0;
       }
 
@@ -189,10 +190,10 @@ export default function Game() {
 
     const draw = () => {
       if (!ctx) return;
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       // draw ground
       ctx.fillStyle = "#654321";
-      ctx.fillRect(0, groundY + 10, canvasWidth, canvasHeight - groundY);
+      ctx.fillRect(0, groundYRef.current + 10, canvas.width, canvas.height - groundYRef.current);
 
       // draw flag pole
       drawSprite(ctx, flagPoleRef.current);
@@ -255,6 +256,8 @@ export default function Game() {
     const setCanvasSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = Math.floor(window.innerHeight * 0.8);
+      groundYRef.current = canvas.height - 50;
+      playerRef.current.y = groundYRef.current;
     };
 
     setCanvasSize();
@@ -301,13 +304,14 @@ export default function Game() {
         border: "2px solid #000",
         borderRadius: "20px",
         overflow: "hidden",
+        height: "100vh",
       }}
     >
       <canvas
         ref={canvasRef}
         width={canvasWidth}
         height={canvasHeight}
-        style={{ border: "1px solid #000", background: "#87ceeb", width: "100%", height: "auto" }}
+        style={{ border: "1px solid #000", background: "#87ceeb", width: "100%", height: "100%" }}
       />
       <div style={{ position: "absolute", top: "1rem", right: "1rem", fontSize: "1.5rem", color: "#000" }}>
         Score: {score}
