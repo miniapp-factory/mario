@@ -292,7 +292,17 @@ export default function Game() {
   }, []);
 
   return (
-    <>
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        maxWidth: "375px",
+        margin: "0 auto",
+        border: "2px solid #000",
+        borderRadius: "20px",
+        overflow: "hidden",
+      }}
+    >
       <canvas
         ref={canvasRef}
         width={canvasWidth}
@@ -350,6 +360,6 @@ export default function Game() {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }
