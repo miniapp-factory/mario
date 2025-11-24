@@ -102,3 +102,9 @@
 # 2025-11-24 09:43:30.309405
 +ok fix the frame width and height, it should be vertical to look like mobile frame but on desktop . in mobile it just responsive goes full height and full width.
 +
+
+# 2025-11-24 10:08:15.465457
++it is vertically squished. can you make this game responsive ? use a fixed width and height that mobiles use so it is proportional on desktop. on mobile go full width and height. 
+
+# 2025-11-24 10:08:15.465904
++it is vertically squished. can you make this game responsive ? use a fixed width and height that mobiles use so it is proportional on desktop. on mobile go full width and height. 
