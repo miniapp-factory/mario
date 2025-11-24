@@ -40,3 +40,9 @@
 +At score to top right of screen, and final score if you die on game over screens add restart button to game over button.
 +
 +When you touch enemy you should die (except when jumping on their head when you kill them) 
+
+# 2025-11-24 01:47:43.825276
++add a share button to the game over screen, to share your score to twitter X or Farcaster
+
+# 2025-11-24 01:47:43.836060
++add a share button to the game over screen, to share your score to twitter X or Farcaster
