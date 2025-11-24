@@ -88,3 +88,9 @@
 
 # 2025-11-24 04:06:45.678159
 +when the player dies, the game should stop. please make the player kangaroo when he touches enemy (not jumping on its head) bounce and die. rotate 45 degrees anti clockwise. then fall off the bottom of the screen from its current place. if dead stop the scrolling background and stop the game. then show game over screen.
+
+# 2025-11-24 05:04:46.614259
++hmm.. lets put the game within a mobile phone size border frame on desktop. for mobile screens it is responsive it goes full width.
+
+# 2025-11-24 05:04:46.616007
++hmm.. lets put the game within a mobile phone size border frame on desktop. for mobile screens it is responsive it goes full width.
