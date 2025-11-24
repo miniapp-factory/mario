@@ -82,3 +82,9 @@
 +I just scored 5  🚀  Check out the new Kangario app built with the #OpenxAI #Base #MiniAppFactory! @openxai @Base https://mario.miniapp-factory.marketplace.openxai.network
 +
 +the app is now called Kangario
+
+# 2025-11-24 04:06:45.663971
++when the player dies, the game should stop. please make the player kangaroo when he touches enemy (not jumping on its head) bounce and die. rotate 45 degrees anti clockwise. then fall off the bottom of the screen from its current place. if dead stop the scrolling background and stop the game. then show game over screen.
+
+# 2025-11-24 04:06:45.678159
++when the player dies, the game should stop. please make the player kangaroo when he touches enemy (not jumping on its head) bounce and die. rotate 45 degrees anti clockwise. then fall off the bottom of the screen from its current place. if dead stop the scrolling background and stop the game. then show game over screen.
