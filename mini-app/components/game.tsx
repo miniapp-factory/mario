@@ -28,6 +28,7 @@ export default function Game() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const animationRef = useRef<number>(0);
   const groundYRef = useRef<number>(canvasHeight - 50);
   const playerRef = useRef<Sprite>({
@@ -44,7 +45,7 @@ export default function Game() {
   const fireballsRef = useRef<Sprite[]>([]);
   const flagPoleRef = useRef<Sprite>({
     x: 2000,
-    y: groundY - 80,
+    y: groundYRef.current - 80,
     width: 20,
     height: 80,
     emoji: "🏁",
@@ -64,7 +65,7 @@ export default function Game() {
     const spawnEnemy = () => {
       enemiesRef.current.push({
         x: canvasWidth + Math.random() * 300,
-        y: groundY,
+        y: groundYRef.current,
         width: 30,
         height: 30,
         emoji: "👹",
@@ -77,7 +78,7 @@ export default function Game() {
     const spawnPowerUp = () => {
       powerUpsRef.current.push({
         x: canvasWidth + Math.random() * 300,
-        y: groundY - 60,
+        y: groundYRef.current - 60,
         width: 20,
         height: 20,
         emoji: "🍎",
@@ -90,7 +91,7 @@ export default function Game() {
     const handleKeyDown = (e: KeyboardEvent) => {
       const player = playerRef.current;
       if (e.code === "Space" || e.code === "ArrowUp") {
-        if (player.y >= groundY) {
+        if (player.y >= groundYRef.current) {
           player.vy = jumpStrength;
         }
       }
@@ -254,10 +255,13 @@ export default function Game() {
     if (!canvas) return;
 
     const setCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = Math.floor(window.innerHeight * 0.8);
+      const mobile = window.innerWidth <= 375;
+      setIsMobile(mobile);
+      canvas.width = mobile ? window.innerWidth : canvasWidth;
+      canvas.height = mobile ? window.innerHeight : canvasHeight;
       groundYRef.current = canvas.height - 50;
       playerRef.current.y = groundYRef.current;
+      flagPoleRef.current.y = groundYRef.current - 80;
     };
 
     setCanvasSize();
@@ -265,7 +269,7 @@ export default function Game() {
 
     const handleTouchStart = (e: TouchEvent) => {
       const player = playerRef.current;
-      if (player.y >= groundY) {
+      if (player.y >= groundYRef.current) {
         player.vy = jumpStrength;
       }
     };
@@ -304,7 +308,7 @@ export default function Game() {
         border: "2px solid #000",
         borderRadius: "20px",
         overflow: "hidden",
-        height: "100vh",
+        height: isMobile ? "100vh" : "667px",
       }}
     >
       <canvas
@@ -342,7 +346,7 @@ export default function Game() {
               setScore(0);
               playerRef.current = {
                 x: 50,
-                y: groundY,
+                y: groundYRef.current,
                 width: 30,
                 height: 30,
                 emoji: "🦘",
