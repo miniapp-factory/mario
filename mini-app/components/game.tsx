@@ -321,7 +321,7 @@ export default function Game() {
         >
           <p>Game Over</p>
           <p>Final Score: {score}</p>
-          <Share text={`Score: ${score} ${url} #Openxai #Base @OpenxAINetwork @Base Check out my new app built with the OpenxAI #MiniAppFactory!`} />
+          <Share text={`I just scored ${score}  🚀  Check out the new Kangario app built with the #OpenxAI #Base #MiniAppFactory! @openxai @Base ${url}`} />
           <button
             onClick={() => {
               setGameOver(false);
