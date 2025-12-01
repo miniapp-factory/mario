@@ -108,3 +108,9 @@
 
 # 2025-11-24 10:08:15.465904
 +it is vertically squished. can you make this game responsive ? use a fixed width and height that mobiles use so it is proportional on desktop. on mobile go full width and height. 
+
+# 2025-12-01 05:04:55.050685
++after you die and game over screen displays, then you must stop the game in background, pause its progress so it does not scroll anymore
+
+# 2025-12-01 05:04:55.051162
++after you die and game over screen displays, then you must stop the game in background, pause its progress so it does not scroll anymore
