@@ -233,7 +233,10 @@ export default function Game() {
     };
 
     const loop = (time: number) => {
-      if (gameOver) return;
+      if (gameOver) {
+        cancelAnimationFrame(animationRef.current);
+        return;
+      }
       const dt = time - lastTime;
       lastTime = time;
       update(dt);
